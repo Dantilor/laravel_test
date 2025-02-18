@@ -14,7 +14,10 @@ use App\Http\Controllers\ArticleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::middleware(['auth'])->group(function () {
+    Route::post('/articles/{article}/comments', [CommentController::class, 'store'])
+         ->name('comments.store');
+});
 Route::get('/auth/create', [AuthController::class, 'create']);
 Route::post('/auth/signUp', [AuthController::class, 'signUp']);
 Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
