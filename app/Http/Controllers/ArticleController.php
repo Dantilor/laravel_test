@@ -61,9 +61,15 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        // return view('articles/show', ['article'=>$article]);
-        return response()->json($article, 201);
+        // Получаем автора статьи
+        // (благодаря Eloquent-связи "belongsTo" это будет объект User)
+        $author = $article->user;
 
+        // Передаём статью и автора в шаблон:
+        return view('articles.show', [
+            'article' => $article,
+            'author'  => $author
+        ]);
     }
 
     /**
